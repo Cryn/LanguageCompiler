@@ -1,0 +1,25 @@
+/* 
+ * Beispiel-Skript für eine Klasse
+ *
+ */
+
+class Klasse 
+	// auflistung aller Member	
+	List(Value)
+	List(Klasse)
+	List(Methode)
+	
+	// mögliche Kombinationen aller Member
+	List(Member) (List(Value), List(Klasse))
+
+	List(All) (List(Value), List(Klasse), List(Methode))
+
+	// spezielle Keywords auf die Member angewendet
+	public : function(element : List(Value))
+		return element
+
+	private : function(element : List(Value))
+		return -
+
+	protected : function(element : List(value))
+end

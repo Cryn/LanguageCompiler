@@ -1,0 +1,25 @@
+Wie sollten Klassen und Strukturen gut und einfach beschrieben werden? 
+Alles wird mit einer Metasprache beschrieben.
+Möglichkeiten: 
+	a) Die Metasprache ist Strukturgesteuert, da Klassen und Strukturen 
+	   ebenfalls strukturelle Elemente ihrer jeweiligen Sprache sind. 
+	   Dies hätte zur Folge, dass die Metasprach gewisse Ähnlichkeiten 
+	   zu dem Paradigma der "Objektorientierten Programmierung" aufweist.
+
+	b) Klassen und Strukturen werden mit Hilfe von Konfigurationen 
+	   beschrieben. Der Vorteil hierbei wäre, dass die Metasprache 
+	   einfach gehalten sein würde. 
+	   Aber hier gäbe es den Nachteil, dass komplexeren Strukturen nicht
+	   abgebildet werden können, was bei Klassen mit "public, protected, 
+	   private, friend" zum Beispiel nicht einfach umzusetzen sei.
+
+	c) Die Beschreibung erfolgt über eine prozedurale Sprache, sprich es 
+	   werden Strukturen erstellt, die die Klassen mit ihren Typen, 
+	   aber nicht ihren "Fähigkeiten" abbilden. Zusätzlich müssen die Fähigkeiten 
+	   den Strukturen vermittelt werden. Dieses Vermitteln wäre komplexer 
+	   als in der Methodik a).
+		
+Die Entscheidung fiel auf Variante a)
+
+Es wird eine einzelne Klasse deklariert, in der alle Sonderzeichen definiert werden.
+Zusätzlich werden hier auch alle unterschiedliche Kombinationen definiert.
