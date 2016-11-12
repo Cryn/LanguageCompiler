@@ -46,11 +46,11 @@ namespace Interpreter {
 		Diese Funktion zerstört am Ende alle File-Objekte die sich 
 		in files befinden und konvertiert diese direkt in tokenFiles;
 	*/
-	static void convert(Files files, TokenFiles* tokenFiles) {
+	static void convert(Files* files, TokenFiles* tokenFiles) {
 		if (tokenFiles == nullptr) {
 			tokenFiles = new std::vector<TokenFile>();
 		}
-		for each (auto var in files){
+		for each (auto var in *files){
 			TokenFile tFile = TokenFile();
 			copy(var, &(tFile.structFile));
 			
@@ -63,21 +63,23 @@ namespace Interpreter {
 			tFile.tokenStream.push_back(t);
 			tokenFiles->push_back(tFile);
 		}
-		files.clear();
+		files->clear();
 	}
 
-	static void convert(Files files, SourceFiles* sourceFiles) {
+	static void convert(Files* files, SourceFiles* sourceFiles) {
 		if (sourceFiles == nullptr) {
 			sourceFiles = new std::vector<SourceFile>();
 		}
-		for each (auto var in files) {
+		if (files == NULL)
+			return;
+		for each (auto var in *files) {
 			SourceFile sFile = SourceFile();
 			copy(var, &(sFile.structFile));
 
 			sFile.source = NO_CONTENT;
 			sourceFiles->push_back(sFile);
 		}
-		files.clear();
+		files->clear();
 	}
 }
 

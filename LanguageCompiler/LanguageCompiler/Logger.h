@@ -7,15 +7,11 @@
 #include <time.h>
 
 #include "InOutput.h"
+#include "AbstractLogger.h"
 
 #define END_SIGN "\n"
 
 namespace Default {
-	class AbstractLogger {
-	public:
-		virtual std::string toLogString() = 0;
-	};
-
 	class Logger {
 	public:
 		static Logger *getInstance() {
@@ -31,7 +27,7 @@ namespace Default {
 			this->logData += s + END_SIGN;
 		}
 
-		void setObject(AbstractLogger* object) {
+		void setObjectLog(AbstractLogger* object) {
 			this->logData += object->toLogString() + END_SIGN;
 		}
 

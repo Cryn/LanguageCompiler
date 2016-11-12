@@ -5,7 +5,14 @@
 
 static void AbortFunction(int type) {
 	// hier wäre eine Logausgabe in einer extra Datei ganz sinnvoll:D
-
+	switch (type)
+	{
+	case INT8_MAX:{
+		// do nothing
+	}
+	default:
+		break;
+	}
 	
 	abort();
 }

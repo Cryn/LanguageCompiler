@@ -3,22 +3,33 @@
 
 #include <vector>
 
-#include "Logger.h"
+#include "AbstractLogger.h"
+#include "InOutput.h"
 #include "File.h"
 #include "Abort.h"
+#include "StateMachine.h"
 
 namespace Interpreter {
-	class Reader : Default::AbstractLogger {
+	class Reader 
+		: public Default::AbstractLogger {
 	public:
-		Reader();
-		Reader(std::string);
-		Reader(std::vector<std::string>);
+		Reader(std::string, StateMachine::StateMachineStruct*);
+		Reader(std::vector<std::string>, StateMachine::StateMachineStruct*);
 		~Reader();
+
+		SourceFiles* generateFiles();
+
 		std::string toLogString();
 	private:
-		void generateFile(std::string, std::string);
-		
+
+		//SourceFiles* getFiles();
+		void init();
+
+		bool isReaded;
+		bool isStateSetted;
+		std::vector<std::string> path;
 		Files* files;
+		StateMachine::StateMachineStruct* stateMachine;
 	};
 }
 
