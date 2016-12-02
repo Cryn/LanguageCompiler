@@ -5,11 +5,10 @@ Default::XMLReader::XMLReader(std::string content){
 	this->xmlTokenStart = new XMLToken();
 }
 
+/*
+	Diese Funktion ist der Ausgangspunkt um diee XML-Datei/ -Daten auszulesen
+*/
 int Default::XMLReader::convert() {
-	/*
-		Aktuell kann dieser nur ein Element pro Ebene auslesen
-		Sollte aber mehrere Elemente pro Ebene lesen können.
-	*/
 	std::string str = this->content;
 	std::string firstTag = str.substr(0, str.find(">") + 1); 
 	firstTag = firstTag.substr(1, firstTag.size() - this->offset);
@@ -20,7 +19,7 @@ int Default::XMLReader::convert() {
 	this->xmlTokenStart->stage = 0;
 	this->xmlTokenStart->parentXMLToken = nullptr;
 	this->xmlTokenStart->
-		subXMLTokens.push_back(this->nextXMLToken(str, 1, this->xmlTokenStart));
+		subXMLTokens.push_back(this->innerXMLToken(str, 1, this->xmlTokenStart));
 	return 0;
 }
 
@@ -28,7 +27,7 @@ int Default::XMLReader::convert() {
 	Diese Funktion sucht mir anhand des endstrings oder midstrings
 	weitere xmlstrings
 */
-Default::XMLToken *Default::XMLReader::nextXMLToken(std::string str, 
+Default::XMLToken *Default::XMLReader::innerXMLToken(std::string str, 
 	int stage, Default::XMLToken* parentToken) {
 	std::string s = str;
 	int stageL = stage;
@@ -47,13 +46,18 @@ Default::XMLToken *Default::XMLReader::nextXMLToken(std::string str,
 		std::string midTag = s.substr(0, s.find("</" + firstTag));
 		if (midTag.size() != 0)
 			xmlToken->
-				subXMLTokens.push_back(this->nextXMLToken(midTag, stage++, xmlToken));
+				subXMLTokens.push_back(this->innerXMLToken(midTag, stage++, xmlToken));
 		s = s.substr(s.find("</" + firstTag) + ("</" + firstTag).size() + 1);
 		if(parentToken != NULL)
 			parentToken->
-				subXMLTokens.push_back(this->nextXMLToken(s, stageL, xmlToken->parentXMLToken));
+				subXMLTokens.push_back(this->innerXMLToken(s, stageL, xmlToken->parentXMLToken));
 		xmlToken->name = firstTag;
 		xmlToken->stage = stageL;
 	}
 	return xmlToken;
+}
+
+Default::Pairs *Default::XMLReader::readPairs(std::string tag){
+	std::vector<Pair> *ret = new std::vector<Pair>();
+	std::string s = tag;
 }

@@ -2,6 +2,7 @@
 #define _XML_READER_H_
 
 #include "AbstractLogger.h"
+#include "Pair.h"
 #include <string>
 #include <iostream>
 #include <vector>
@@ -11,7 +12,7 @@ namespace Default {
 	struct struct_xml_token;
 	typedef struct_xml_token XMLToken;
 	struct struct_xml_token {
-		std::vector<std::string> attributes;
+		Default::Pairs *attributes;
 		int stage;
 		std::string name;
 		XMLToken* parentXMLToken;
@@ -30,7 +31,8 @@ namespace Default {
 		const int offset = 2;
 		std::string content;
 		XMLToken *xmlTokenStart;
-		XMLToken *nextXMLToken(std::string, int, XMLToken*);
+		XMLToken *innerXMLToken(std::string, int, XMLToken*);
+		Default::Pairs *readPairs(std::string);		
 	};
 }
 
